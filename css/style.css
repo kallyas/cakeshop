@@ -12,14 +12,95 @@ html {
 
 header {
   height: 176px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 nav {
   height: 100px;
   width: 1200px;
-  border: 1px solid red;
+  /* border: 1px solid red; */
+  grid-column: 2/3;
+  display: flex;
+  /* border-bottom: 1px solid #dfdcdc;
+  box-shadow: 0px 4px 10px #e1dfdf; */
 }
 
 main {
   width: 100%;
+}
+
+.total {
+  display: flex;
+  align-items: center;
+  text-align: right;
+}
+
+.total img {
+  height: 25px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.total-p {
+  display: flex;
+  align-items: flex-end;
+  text-align: right;
+  margin-left: 450px;
+}
+
+.menu {
+  align-items: flex-start;
+}
+
+.menu {
+  align-items: flex-start;
+  position: relative;
+  display: flex;
+  margin-top: 35px;
+  font-size: 2rem;
+  cursor: pointer;
+  margin-left: 15px;
+  padding: 2px;
+}
+
+.logo p {
+  align-items: center;
+}
+
+.logo {
+  align-content: center;
+  align-items: center;
+  position: relative;
+  display: flex;
+  flex-basis: content;
+  margin-left: 400px;
+}
+
+main {
+  border: 1px solid red;
+}
+
+footer {
+  border: 1px solid red;
+  height: 108px;
+}
+
+.sorting-nav {
+  border: 1px solid rgb(90, 32, 32);
+}
+
+.products-container {
+  border: 1px solid blue;
+}
+
+.product-card {
+  border: 1px solid #194e22;
+  width: 293px;
+  height: 372px;
+}
+
+.card-body img {
+  width: 293px;
+  height: 372px;
 }
