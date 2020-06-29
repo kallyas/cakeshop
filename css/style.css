@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: #ffffff;
+}
+
+html {
+  height: 100%;
+  width: auto;
+}
+
+header {
+  height: 176px;
+}
+
+nav {
+  height: 100px;
+  width: 1200px;
+  border: 1px solid red;
+}
+
+main {
+  width: 100%;
+}
