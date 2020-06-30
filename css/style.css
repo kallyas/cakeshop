@@ -14,7 +14,6 @@ html {
 }
 
 header {
-  height: 176px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
@@ -22,11 +21,8 @@ header {
 nav {
   height: 100px;
   width: 1200px;
-  /* border: 1px solid red; */
   grid-column: 2/3;
   display: flex;
-  /* border-bottom: 1px solid #dfdcdc;
-  box-shadow: 0px 4px 10px #e1dfdf; */
 }
 
 main {
@@ -81,14 +77,12 @@ main {
 }
 
 main {
-  border: 1px solid red;
 }
 
 footer {
   position: relative;
   margin-top: 100px;
   text-align: center;
-  border: 1px solid red;
   height: 108px;
 }
 .sorting-nav {
@@ -109,7 +103,6 @@ footer {
   width: 800px;
   height: 60px;
   position: relative;
-  border: 1px solid rgb(90, 32, 32);
 }
 
 .products-container {
@@ -120,13 +113,12 @@ footer {
   top: 90px;
   gap: 5px;
   right: 119px;
-  border: 1px solid blue;
+
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 }
 
 .product-card {
-  border: 1px solid #194e22;
   width: 293px;
   height: 372px;
 }
@@ -176,7 +168,25 @@ footer {
 .fa-plus:hover {
   background-color: #c58e64;
 }
+footer ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  width: 357px;
+  left: 604px;
+  position: relative;
+  top: 23px;
+  height: 25px;
+}
 
+footer ul li {
+  margin-top: 5px;
+}
+footer p {
+  position: absolute;
+  left: 640px;
+  top: 68px;
+}
 @media screen and (max-width: 464px) {
   header {
     height: 116px;
