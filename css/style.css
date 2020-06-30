@@ -90,6 +90,12 @@ footer {
 }
 .sorting-nav ul li {
   margin-top: 1rem;
+  cursor: pointer;
+}
+
+.sorting-nav ul li:hover {
+  border-bottom: 1px solid #c58e64;
+  color: #c58e64;
 }
 
 .sorting-nav ul {
