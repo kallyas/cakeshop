@@ -1,0 +1,283 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: #ffffff;
+  font-family: "Josefin Sans", sans-serif;
+}
+
+html {
+  height: 100%;
+  width: auto;
+}
+
+header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+nav {
+  height: 100px;
+  width: 1200px;
+  grid-column: 2/3;
+  display: flex;
+}
+
+main {
+  width: 100%;
+}
+
+.total {
+  display: flex;
+  align-items: center;
+  text-align: right;
+}
+
+.total img {
+  height: 25px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.total-p {
+  display: flex;
+  align-items: flex-end;
+  text-align: right;
+  margin-left: 450px;
+}
+
+.menu {
+  align-items: flex-start;
+}
+
+.menu {
+  align-items: flex-start;
+  position: relative;
+  display: flex;
+  margin-top: 35px;
+  font-size: 2rem;
+  cursor: pointer;
+  margin-left: 15px;
+  padding: 2px;
+}
+
+.logo p {
+  align-items: center;
+}
+
+.logo {
+  align-content: center;
+  align-items: center;
+  position: relative;
+  display: flex;
+  flex-basis: content;
+  margin-left: 400px;
+}
+
+main {
+}
+
+footer {
+  position: relative;
+  margin-top: 100px;
+  text-align: center;
+  height: 108px;
+}
+.sorting-nav {
+  margin-left: 80px;
+}
+.sorting-nav ul li {
+  margin-top: 1rem;
+}
+
+.sorting-nav ul {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  list-style: none;
+  align-content: center;
+  text-align: center;
+  left: 300px;
+  width: 800px;
+  height: 60px;
+  position: relative;
+}
+
+.products-container {
+  position: relative;
+  width: 1164px;
+  height: 776px;
+  left: 207px;
+  top: 90px;
+  gap: 5px;
+  right: 119px;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.product-card {
+  width: 293px;
+  height: 372px;
+}
+
+.card-header {
+  position: relative;
+  top: 20px;
+}
+.card-header p {
+  text-align: center;
+}
+.card-body img {
+  width: 100%;
+  height: 50%;
+}
+
+.add-cart {
+  position: relative;
+  background: #ffffff;
+  color: #d2bba9;
+  font-size: 16.5px;
+  border: 1px solid #d2bba9;
+  width: 130px;
+  height: 33px;
+  left: 31px;
+  top: 14px;
+}
+.add-cart:hover {
+  background-color: #c58e64;
+  color: #ffffff;
+}
+
+.card-footer p {
+  position: relative;
+  margin-top: -10px;
+  width: 82px;
+  height: 28px;
+  left: 191px;
+}
+
+.fa-plus {
+  float: right;
+  margin-right: 10px;
+  text-align: center;
+}
+
+.fa-plus:hover {
+  background-color: #c58e64;
+}
+footer ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  width: 357px;
+  left: 604px;
+  position: relative;
+  top: 23px;
+  height: 25px;
+}
+
+footer ul li {
+  margin-top: 5px;
+}
+footer p {
+  position: absolute;
+  left: 640px;
+  top: 68px;
+}
+@media screen and (max-width: 464px) {
+  header {
+    height: 116px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 100%;
+    border: 1px solid red;
+  }
+
+  .logo {
+    margin-left: 45px;
+  }
+
+  nav {
+    height: 100px;
+    width: 464px;
+    grid-column: 2/3;
+    display: inline-flex;
+    justify-content: space-between;
+  }
+  .total {
+    margin-left: 50px;
+  }
+
+  .total-p {
+    display: flex;
+    align-items: flex-end;
+    text-align: right;
+    margin-right: 10px;
+    margin-left: 0px;
+    padding-top: 5px;
+  }
+
+  .total img {
+    height: 25px;
+    margin-right: 15px;
+    cursor: pointer;
+  }
+
+  .sorting-nav {
+    margin-left: 0px;
+  }
+
+  .sorting-nav ul {
+    left: 0px;
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .products-container {
+    width: auto;
+    height: auto;
+    grid-template-columns: 1fr;
+    margin-left: 50px;
+    margin-right: 50px;
+    left: 0px;
+  }
+
+  .product-card {
+    margin-left: 30px;
+    width: auto;
+    height: auto;
+  }
+
+  /* footer {
+    margin-top: 2300px;
+  } */
+}
+
+@media screen and (max-width: 360px) {
+  nav {
+    width: auto;
+  }
+
+  .menu {
+    margin-left: 0px;
+    font-size: 1.5rem;
+  }
+  .logo {
+    margin-left: 30px;
+  }
+
+  .total {
+    margin-left: 15px;
+  }
+  .total img {
+    margin-left: -5px;
+  }
+  .product-card {
+    width: auto;
+    height: auto;
+  }
+}
