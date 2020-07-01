@@ -237,6 +237,14 @@ footer p {
   padding: 2px;
 }
 
+.cart {
+  width: 300px;
+  height: 500px;
+  background: red;
+  float: right;
+  z-index: 1;
+  visibility: hidden;
+}
 @media screen and (max-width: 464px) {
   header {
     height: 116px;
