@@ -46,6 +46,7 @@ main {
   align-items: flex-end;
   text-align: right;
   margin-left: 450px;
+  color: #c58e64;
 }
 
 .menu {
@@ -90,11 +91,15 @@ footer {
 .sorting-nav ul li {
   margin-top: 1rem;
   cursor: pointer;
+  margin-bottom: 25px;
 }
 
 .sorting-nav ul li:hover {
   border-bottom: 1px solid #c58e64;
   color: #c58e64;
+  transition: 0.3s ease;
+  transform: scale(1.1);
+  margin-bottom: 20px;
 }
 
 .sorting-nav ul {
@@ -118,7 +123,6 @@ footer {
   top: 90px;
   gap: 5px;
   right: 119px;
-
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 }
@@ -126,6 +130,7 @@ footer {
 .product-card {
   width: 293px;
   height: 372px;
+  border: 0.5px solid #c58e64;
 }
 
 .card-header {
@@ -133,16 +138,30 @@ footer {
   top: 20px;
   height: 30px;
 }
+
 .card-header p {
   text-align: center;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  position: relative;
+  left: 90px;
+  width: 100px;
 }
 
 .card-body {
-  ight: 251px;
+  height: 251px;
+  padding-top: 50px;
+  align-content: center;
+  display: flex;
+  align-items: center;
 }
+
 .card-body img {
-  width: 100%;
-  height: auto;
+  width: 50%;
+  height: 50%;
+  left: 3rem;
+  position: relative;
 }
 
 .add-cart {
@@ -152,13 +171,16 @@ footer {
   font-size: 16.5px;
   border: 1px solid #d2bba9;
   width: 130px;
-  height: 33px;
+  height: 40px;
   left: 31px;
   top: 14px;
 }
+
 .add-cart:hover {
-  background-color: #c58e64;
+  background-color: #be865b;
   color: #ffffff;
+  transition: width 0.3s;
+  width: 150px;
 }
 
 .card-footer p {
