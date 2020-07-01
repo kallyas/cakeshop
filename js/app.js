@@ -1,20 +1,16 @@
-const users = [
-  {
-    username: "kally",
-    password: "12345",
-  },
-  {
-    username: "hope",
-    password: "12345",
-  },
-  {
-    username: "jane",
-    password: "12345",
-  },
-  {
-    username: "ketty",
-    password: "12345",
-  },
-];
+// get variables
+const itemsCounter = document.querySelector(".count");
+const buttons = [...document.querySelectorAll(".add-cart")];
+let count = 0;
+buttons.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    e.target.innerText = `In Cart(${++count})`;
+    itemsCounter.innerText = count++;
+    updateCount();
+  });
+  return;
+});
 
-users.push({ username: "vamoos", password: "23454" });
+function updateCount() {
+  itemsCounter.style.visibility = "visible";
+}

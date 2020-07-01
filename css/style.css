@@ -198,7 +198,8 @@ footer {
 }
 
 .fa-plus:hover {
-  background-color: #c58e64;
+  display: none;
+  visibility: hidden;
 }
 footer ul {
   list-style: none;
@@ -219,6 +220,23 @@ footer p {
   left: 640px;
   top: 68px;
 }
+
+.count {
+  background: #be865b;
+  border: 1px solid #be865b;
+  color: #fff;
+  border-radius: 50%;
+  left: 40px;
+  position: relative;
+  height: 20px;
+  width: 20px;
+  text-align: center;
+  font-size: 14px;
+  margin-top: -15px;
+  visibility: hidden;
+  padding: 2px;
+}
+
 @media screen and (max-width: 464px) {
   header {
     height: 116px;
