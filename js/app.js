@@ -117,11 +117,6 @@ function displaySortingNav() {
     .map((category) => {
       return `<li class="filter" data-id=${category}>${category}</li>`;
     })
-    // .map(function (category) {
-    //   return `<button class="filter-btn" type="button" data-id=${category}>
-    //   ${category}
-    //   </button>`;
-    // })
     .join("");
   sortingNav.innerHTML = categoryBtns;
   const filterBtns = sortingNav.querySelectorAll(".filter");
@@ -141,6 +136,7 @@ function displaySortingNav() {
       } else {
         displayMenuItems(menuCategory);
       }
+      activateBtnCart();
     });
   });
 }
