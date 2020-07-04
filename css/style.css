@@ -245,6 +245,10 @@ footer p {
   z-index: 1;
   visibility: hidden;
 }
+
+.push {
+  height: 372px;
+}
 @media screen and (max-width: 464px) {
   header {
     height: 116px;
