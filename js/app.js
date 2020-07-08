@@ -1,4 +1,4 @@
-const menu = [
+const cakes = [
   {
     id: 1,
     title: "Black Forest",
@@ -76,13 +76,13 @@ const itemsCounter = document.querySelector(".count");
 let count = 0;
 // load Items
 window.addEventListener("DOMContentLoaded", () => {
-  displayMenuItems(menu);
+  displaycakesItems(cakes);
   displaySortingNav();
   activateBtnCart();
 });
 
-function displayMenuItems(menuItems) {
-  let displayMenu = menuItems.map((item) => {
+function displaycakesItems(cakesItems) {
+  let displaycakes = cakesItems.map((item) => {
     return `<div class="product-card">
         <div class="card-header">
           <p>${item.title}</p>
@@ -91,7 +91,7 @@ function displayMenuItems(menuItems) {
           <img src=${item.img} alt="cake-image" />
         </div>
         <div class="card-footer">
-          <button class="add-cart">
+          <button class="add-cart" data-id="${item.id}">
             Add to cart
           </button>
           <p>$${item.price}</p>
@@ -99,12 +99,12 @@ function displayMenuItems(menuItems) {
       </div>`;
   });
 
-  displayMenu = displayMenu.join("");
-  productsContainer.innerHTML = displayMenu;
+  displaycakes = displaycakes.join("");
+  productsContainer.innerHTML = displaycakes;
 }
 
 function displaySortingNav() {
-  const categories = menu.reduce(
+  const categories = cakes.reduce(
     function (values, item) {
       if (!values.includes(item.category)) {
         values.push(item.category);
@@ -124,17 +124,17 @@ function displaySortingNav() {
   filterBtns.forEach(function (btn) {
     btn.addEventListener("click", function (e) {
       const category = e.currentTarget.dataset.id;
-      const menuCategory = menu.filter(function (menuItem) {
-        // console.log(menuItem.category);
-        if (menuItem.category === category) {
-          return menuItem;
+      const cakesCategory = cakes.filter(function (cakesItem) {
+        // console.log(cakesItem.category);
+        if (cakesItem.category === category) {
+          return cakesItem;
         }
       });
-      // console.log(menuCategory);
+      // console.log(cakesCategory);
       if (category === "all") {
-        displayMenuItems(menu);
+        displaycakesItems(cakes);
       } else {
-        displayMenuItems(menuCategory);
+        displaycakesItems(cakesCategory);
       }
       activateBtnCart();
     });
@@ -145,10 +145,13 @@ function activateBtnCart() {
   const buttons = [...document.querySelectorAll(".add-cart")];
   buttons.forEach((button) => {
     button.addEventListener("click", (e) => {
-      e.target.innerText = `In Cart(${++count})`;
-      itemsCounter.innerText = count++;
-      updateCount();
-      console.log("inner");
+      if (e.target.data - id === item.id) {
+        e.target.innerText = `In Cart(${++count})`;
+        console.log(e.target.value);
+        itemsCounter.innerText = count++;
+        updateCount();
+        console.log("inner");
+      }
     });
     return;
   });
