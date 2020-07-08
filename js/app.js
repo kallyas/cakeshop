@@ -74,6 +74,7 @@ const productsContainer = document.querySelector(".products-container");
 const sortingNav = document.querySelector(".sorting-nav ul");
 const itemsCounter = document.querySelector(".count");
 let count = 0;
+let cart = [];
 // load Items
 window.addEventListener("DOMContentLoaded", () => {
   displaycakesItems(cakes);
@@ -144,18 +145,17 @@ function displaySortingNav() {
 function activateBtnCart() {
   const buttons = [...document.querySelectorAll(".add-cart")];
   buttons.forEach((button) => {
+    let count = 0;
+    let id = button.dataset.id;
     button.addEventListener("click", (e) => {
-      if (e.target.data - id === item.id) {
-        e.target.innerText = `In Cart(${++count})`;
-        console.log(e.target.value);
-        itemsCounter.innerText = count++;
-        updateCount();
-        console.log("inner");
+      if (e.target.dataset.id === id) {
+        e.target.innerText = `In Cart(${(count += 1)})`;
+        let counter = cart.push(cakes.title);
+        console.log(`Added product with Id ${id}`);
+          itemsCounter.style.visibility = "visible";
+          itemsCounter.innerText = counter
       }
     });
-    return;
   });
 }
-function updateCount() {
-  itemsCounter.style.visibility = "visible";
-}
+
