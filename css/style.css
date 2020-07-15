@@ -25,6 +25,35 @@ nav {
   display: flex;
 }
 
+.mini {
+  position: fixed;
+  top: 80px;
+  right: 210px;
+  width: 200px;
+  z-index: 1;
+  background: #fff;
+  padding: 40px;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: opacity 0.2s ease 0.2s;
+  transition: opacity 0.2s ease 0.2s;
+}
+.mini.visible {
+  padding: 40px;
+  opacity: 1;
+  visibility: visible;
+}
+.mini .products {
+  font-weight: bold;
+  font-size: 14px;
+}
+nav .mini p {
+  font-size: 11px;
+  display: block;
+  margin: 0;
+  padding: 0;
+  line-height: 20px;
+}
 main {
   width: 100%;
 }
@@ -131,6 +160,7 @@ footer {
   width: 293px;
   height: 372px;
   border: 0.5px solid #c58e64;
+  border-radius: 5px;
 }
 
 .card-header {
@@ -174,6 +204,7 @@ footer {
   height: 40px;
   left: 31px;
   top: 14px;
+  border-radius: 10px;
 }
 
 .add-cart:hover {
