@@ -67,6 +67,27 @@ const cakes = [
     price: 39.99,
     img: "./images/black-forest.png",
   },
+  {
+    id: 11,
+    title: "Yellow Butter Cake",
+    category: "cake",
+    price: 20.56,
+    img: "./images/yellowbuttercake.png",
+  },
+  {
+    id: 12,
+    title: "Lemon Iced Cake",
+    category: "Bakery",
+    price: 20.56,
+    img: "./images/lemonIced.png",
+  },
+  {
+    id: 13,
+    title: "Lemon Loaf Cake",
+    category: "cup",
+    price: 30.56,
+    img: "./images/Lemonloaf.png",
+  },
 ];
 
 // get variables
