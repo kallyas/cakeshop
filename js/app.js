@@ -96,6 +96,7 @@ const sortingNav = document.querySelector(".sorting-nav ul");
 const itemsCounter = document.querySelector(".count");
 let count = 0;
 let cart = [];
+let inCart = [];
 // load Items
 window.addEventListener("DOMContentLoaded", () => {
   displaycakesItems(cakes);
