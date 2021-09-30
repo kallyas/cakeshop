@@ -1,100 +1,10 @@
-const cakes = [
-  {
-    id: 1,
-    title: "Black Forest",
-    category: "cakes",
-    price: 15.99,
-    img: "./images/black-forest.png",
-  },
-  {
-    id: 2,
-    title: "Black Forest",
-    category: "cup cakes",
-    price: 13.99,
-    img: "./images/cake-2.png",
-  },
-  {
-    id: 3,
-    title: "Black Forest",
-    category: "bread",
-    price: 6.99,
-    img: "./images/double-choc_1.jpg",
-  },
-  {
-    id: 4,
-    title: "Black Forest",
-    category: "breakfast",
-    price: 20.99,
-    img: "./images/double-choc_1.jpg",
-  },
-  {
-    id: 5,
-    title: "Black Forest",
-    category: "bakery",
-    price: 22.99,
-    img: "./images/sponge-cake-recipe.png",
-    id: 6,
-    title: "Black Forest",
-    category: "bakery",
-    price: 18.99,
-    img: "./images/StrawberryFields.png",
-  },
-  {
-    id: 7,
-    title: "Black Forest",
-    category: "cup cakes",
-    price: 8.99,
-    img: "./images/white-mud-cake.png",
-  },
-  {
-    id: 8,
-    title: "Black Forest",
-    category: "cakes",
-    price: 12.99,
-    img: "./images/black_10.jpg",
-  },
-  {
-    id: 9,
-    title: "Black Forest",
-    category: "bakery",
-    price: 16.99,
-    img: "./images/cake-2.png",
-  },
-  {
-    id: 10,
-    title: "Black Forest",
-    category: "bread",
-    price: 39.99,
-    img: "./images/black-forest.png",
-  },
-  {
-    id: 11,
-    title: "Yellow Butter Cake",
-    category: "cake",
-    price: 20.56,
-    img: "./images/yellowbuttercake.png",
-  },
-  {
-    id: 12,
-    title: "Lemon Iced Cake",
-    category: "Bakery",
-    price: 20.56,
-    img: "./images/lemonIced.png",
-  },
-  {
-    id: 13,
-    title: "Lemon Loaf Cake",
-    category: "cup",
-    price: 30.56,
-    img: "./images/Lemonloaf.png",
-  },
-];
-
 // get variables
 const productsContainer = document.querySelector(".products-container");
 const sortingNav = document.querySelector(".sorting-nav ul");
 const itemsCounter = document.querySelector(".count");
+const totalPrice = document.querySelector(".total-p");
 let count = 0;
+let total = 0;
 let cart = [];
 let inCart = [];
 // load Items
@@ -147,12 +57,9 @@ function displaySortingNav() {
   filterBtns.forEach(function (btn) {
     btn.addEventListener("click", function (e) {
       const category = e.currentTarget.dataset.id;
-      const cakesCategory = cakes.filter(function (cakesItem) {
-        // console.log(cakesItem.category);
-        if (cakesItem.category === category) {
-          return cakesItem;
-        }
-      });
+      const cakesCategory = cakes.filter(
+        (cakesItem) => cakesItem.category === category
+      );
       // console.log(cakesCategory);
       if (category === "all") {
         displaycakesItems(cakes);
@@ -172,13 +79,24 @@ function activateBtnCart() {
     button.addEventListener("click", (e) => {
       if (e.target.dataset.id === id) {
         e.target.innerText = `In Cart(${(count += 1)})`;
-        let counter = cart.push(cakes.title);
+        let counter = cart.push(
+          cakes.filter((cake) => cake.id === parseInt(id))[0]
+        );
+        total = cart
+          .map((item) => item.price)
+          .reduce((a, b) => a + b, 0)
+          .toFixed(2);
+        addPrice(total);
         console.log(`Added product with Id ${id}`);
         itemsCounter.style.visibility = "visible";
         itemsCounter.innerText = counter;
       }
     });
   });
+}
+
+function addPrice(price) {
+  totalPrice.innerText = `$${price}`;
 }
 
 // var cartCount = 0,
