@@ -186,6 +186,10 @@ footer {
   position: relative;
 }
 
+.cart-ctn p {
+  color: white;
+  background-color: #191919;
+}
 .add-cart {
   position: relative;
   background: #ffffff;

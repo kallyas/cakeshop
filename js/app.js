@@ -3,6 +3,10 @@ const productsContainer = document.querySelector(".products-container");
 const sortingNav = document.querySelector(".sorting-nav ul");
 const itemsCounter = document.querySelector(".count");
 const totalPrice = document.querySelector(".total-p");
+const cartContainer = document.querySelector(".quickviewContainer");
+const btnCart = document.querySelector("#cart");
+const btnClose = document.querySelector(".close");
+const cartList = document.querySelector(".cart-ctn");
 let count = 0;
 let total = 0;
 let cart = [];
@@ -13,6 +17,25 @@ window.addEventListener("DOMContentLoaded", () => {
   displaySortingNav();
   activateBtnCart();
 });
+
+btnClose.addEventListener("click", () => {
+  cartContainer.style.right = "-100%";
+});
+
+btnCart.addEventListener("click", () => {
+  cartContainer.style.right = "-1%";
+});
+
+function displayCart(list) {
+  let items = list.map((item) => {
+    return `
+    <p>${item.title}</>
+    `;
+  });
+
+  items = items.join("");
+  cartList.innerHTML = items;
+}
 
 function displaycakesItems(cakesItems) {
   let displaycakes = cakesItems.map((item) => {
@@ -60,7 +83,7 @@ function displaySortingNav() {
       const cakesCategory = cakes.filter(
         (cakesItem) => cakesItem.category === category
       );
-      // console.log(cakesCategory);
+
       if (category === "all") {
         displaycakesItems(cakes);
       } else {
@@ -87,6 +110,7 @@ function activateBtnCart() {
           .reduce((a, b) => a + b, 0)
           .toFixed(2);
         addPrice(total);
+        displayCart(cart);
         console.log(`Added product with Id ${id}`);
         itemsCounter.style.visibility = "visible";
         itemsCounter.innerText = counter;
