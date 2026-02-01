@@ -7,15 +7,14 @@ const cartContainer = document.querySelector(".quickviewContainer");
 const btnCart = document.querySelector("#cart");
 const btnClose = document.querySelector(".close");
 const cartList = document.querySelector(".cart-ctn");
-let count = 0;
-let total = 0;
 let cart = [];
-let inCart = [];
+
 // load Items
 window.addEventListener("DOMContentLoaded", () => {
   displaycakesItems(cakes);
   displaySortingNav();
   activateBtnCart();
+  loadCartFromStorage();
 });
 
 btnClose.addEventListener("click", () => {
@@ -23,22 +22,161 @@ btnClose.addEventListener("click", () => {
 });
 
 btnCart.addEventListener("click", () => {
-  cartContainer.style.right = "-1%";
+  cartContainer.style.right = "0";
+  displayCart();
 });
 
-function displayCart(list) {
-  let items = list.map((item) => {
+function saveCartToStorage() {
+  localStorage.setItem("cakeShopCart", JSON.stringify(cart));
+}
+
+function loadCartFromStorage() {
+  const savedCart = localStorage.getItem("cakeShopCart");
+  if (savedCart) {
+    cart = JSON.parse(savedCart);
+    updateCartUI();
+    displayCart();
+  }
+}
+
+function updateCartUI() {
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
+  
+  if (totalItems > 0) {
+    itemsCounter.style.visibility = "visible";
+    itemsCounter.innerText = totalItems;
+  } else {
+    itemsCounter.style.visibility = "hidden";
+  }
+  
+  totalPrice.innerText = `$${total}`;
+}
+
+function displayCart() {
+  if (cart.length === 0) {
+    cartList.innerHTML = '<div class="cart-empty">Your cart is empty</div>';
+    return;
+  }
+
+  let cartHTML = cart.map((item) => {
     return `
-    <p>${item.title}</>
+      <div class="cart-item">
+        <div class="cart-item-header">
+          <span class="cart-item-title">${item.title}</span>
+          <button class="cart-item-remove" data-id="${item.id}">Remove</button>
+        </div>
+        <div class="cart-item-details">
+          <span class="cart-item-price">$${(item.price * item.quantity).toFixed(2)}</span>
+          <div class="cart-item-controls">
+            <button class="decrease-qty" data-id="${item.id}">-</button>
+            <span class="cart-item-quantity">${item.quantity}</span>
+            <button class="increase-qty" data-id="${item.id}">+</button>
+          </div>
+        </div>
+      </div>
     `;
+  }).join("");
+
+  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
+  
+  cartHTML += `
+    <div class="cart-total">
+      <div class="cart-total-label">Total Amount</div>
+      <div class="cart-total-amount">$${total}</div>
+    </div>
+  `;
+
+  cartList.innerHTML = cartHTML;
+
+  // Add event listeners for cart actions
+  document.querySelectorAll(".increase-qty").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      increaseQuantity(parseInt(e.target.dataset.id));
+    });
   });
 
-  items = items.join("");
-  cartList.innerHTML = items;
+  document.querySelectorAll(".decrease-qty").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      decreaseQuantity(parseInt(e.target.dataset.id));
+    });
+  });
+
+  document.querySelectorAll(".cart-item-remove").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      removeFromCart(parseInt(e.target.dataset.id));
+    });
+  });
+}
+
+function addToCart(productId) {
+  const product = cakes.find((cake) => cake.id === productId);
+  const existingItem = cart.find((item) => item.id === productId);
+
+  if (existingItem) {
+    existingItem.quantity += 1;
+  } else {
+    cart.push({ ...product, quantity: 1 });
+  }
+
+  updateCartUI();
+  displayCart();
+  saveCartToStorage();
+  updateAddToCartButton(productId);
+}
+
+function increaseQuantity(productId) {
+  const item = cart.find((item) => item.id === productId);
+  if (item) {
+    item.quantity += 1;
+    updateCartUI();
+    displayCart();
+    saveCartToStorage();
+    updateAddToCartButton(productId);
+  }
+}
+
+function decreaseQuantity(productId) {
+  const item = cart.find((item) => item.id === productId);
+  if (item) {
+    if (item.quantity > 1) {
+      item.quantity -= 1;
+    } else {
+      removeFromCart(productId);
+      return;
+    }
+    updateCartUI();
+    displayCart();
+    saveCartToStorage();
+    updateAddToCartButton(productId);
+  }
+}
+
+function removeFromCart(productId) {
+  cart = cart.filter((item) => item.id !== productId);
+  updateCartUI();
+  displayCart();
+  saveCartToStorage();
+  updateAddToCartButton(productId);
+}
+
+function updateAddToCartButton(productId) {
+  const button = document.querySelector(`.add-cart[data-id="${productId}"]`);
+  if (!button) return;
+
+  const cartItem = cart.find((item) => item.id === productId);
+  if (cartItem) {
+    button.innerText = `In Cart (${cartItem.quantity})`;
+  } else {
+    button.innerText = "Add to cart";
+  }
 }
 
 function displaycakesItems(cakesItems) {
   let displaycakes = cakesItems.map((item) => {
+    const cartItem = cart.find((cartItem) => cartItem.id === item.id);
+    const buttonText = cartItem ? `In Cart (${cartItem.quantity})` : "Add to cart";
+    
     return `<div class="product-card">
         <div class="card-header">
           <p>${item.title}</p>
@@ -48,7 +186,7 @@ function displaycakesItems(cakesItems) {
         </div>
         <div class="card-footer">
           <button class="add-cart" data-id="${item.id}">
-            Add to cart
+            ${buttonText}
           </button>
           <p>$${item.price}</p>
         </div>
@@ -76,9 +214,15 @@ function displaySortingNav() {
     .join("");
   sortingNav.innerHTML = categoryBtns;
   const filterBtns = sortingNav.querySelectorAll(".filter");
+  
   // filter items
   filterBtns.forEach(function (btn) {
     btn.addEventListener("click", function (e) {
+      // Remove active class from all buttons
+      filterBtns.forEach(b => b.classList.remove('active'));
+      // Add active class to clicked button
+      e.currentTarget.classList.add('active');
+      
       const category = e.currentTarget.dataset.id;
       const cakesCategory = cakes.filter(
         (cakesItem) => cakesItem.category === category
@@ -92,35 +236,26 @@ function displaySortingNav() {
       activateBtnCart();
     });
   });
+  
+  // Set 'all' as active by default
+  if (filterBtns.length > 0) {
+    filterBtns[0].classList.add('active');
+  }
 }
 
 function activateBtnCart() {
   const buttons = [...document.querySelectorAll(".add-cart")];
   buttons.forEach((button) => {
-    let count = 0;
-    let id = button.dataset.id;
-    button.addEventListener("click", (e) => {
-      if (e.target.dataset.id === id) {
-        e.target.innerText = `In Cart(${(count += 1)})`;
-        let counter = cart.push(
-          cakes.filter((cake) => cake.id === parseInt(id))[0]
-        );
-        total = cart
-          .map((item) => item.price)
-          .reduce((a, b) => a + b, 0)
-          .toFixed(2);
-        addPrice(total);
-        displayCart(cart);
-        console.log(`Added product with Id ${id}`);
-        itemsCounter.style.visibility = "visible";
-        itemsCounter.innerText = counter;
-      }
+    let id = parseInt(button.dataset.id);
+    
+    // Remove old event listeners by cloning
+    const newButton = button.cloneNode(true);
+    button.parentNode.replaceChild(newButton, button);
+    
+    newButton.addEventListener("click", (e) => {
+      addToCart(id);
     });
   });
-}
-
-function addPrice(price) {
-  totalPrice.innerText = `$${price}`;
 }
 
 // var cartCount = 0,
